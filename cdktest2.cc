@@ -1,6 +1,9 @@
 // William Truong wxt160130
 #include <iostream>
 #include "cdk.h"
+#include<iomanip>
+#include<fstream>
+#include<stdint.h> 
 
 
 #define MATRIX_WIDTH 3
@@ -9,6 +12,27 @@
 #define MATRIX_NAME_STRING "Test Matrix"
 
 using namespace std;
+
+class BinaryFileHeader
+{
+public: 
+  uint32_t magicNumber ; 
+  uint32_t versionNumber ; 
+  uint64_t numRecords ; 
+
+} ;
+
+const int maxRecordStringLength = 25 ; 
+
+class BinaryFileRecord{
+
+public: 
+  uint8_t strLength ; 
+  char stringBuffer[maxRecordStringLength] ;
+
+
+} ;
+
 
 
 int main()
@@ -52,7 +76,22 @@ int main()
   /*
    * Dipslay a message
    */
-  setCDKMatrixCell(myMatrix, 2, 2, "Test Message");
+  // setCDKMatrixCell(myMatrix, 2, 2, "Test Message");
+
+  BinaryFileHeader *myHeader = new BinaryFileHeader() ; 
+  
+  BinaryFileRecord *myRecord = new BinaryFileRecord() ; // new records 
+
+  ifstream binInFile("cs3377.bin",ios::in|ios::binary) ; // open binary file 
+
+  binInFile.read((char *)myRecord,sizeof(BinaryFileRecord)) ; // reading in of the record 
+
+  binInFile.read((char *)myHeader,sizeof(BinaryFileHeader)) ; // read iint he records
+
+  // setCDKMatrixCell(myMatrix,1,1,myHeader->magicNumber) ;
+  // setCDKMatrixCell(myMatrix,1,2,myHeader->versionNumber);
+  // setCDKMatrixCell(myMatrix,1,3,myHeader->numRecords) ; 
+
   drawCDKMatrix(myMatrix, true);    /* required  */
   
   unsigned char x ; 
