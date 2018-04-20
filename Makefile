@@ -4,9 +4,9 @@
 #
 
 CXX = g++ 
-CXXFLAGS = 
-CPPFLAGS = -Wall -g -I/people/cs/s/wxt160130/include
-LDFLAGS = -L/people/cs/w/wxt160130/lib
+CXXFLAGS = -Wall -g
+CPPFLAGS =  -I /scratch/perkins/include
+LDFLAGS = -L /scratch/perkins/lib
 LDLIBS = -lcdk -lcurses
 
 #
@@ -14,11 +14,13 @@ LDLIBS = -lcdk -lcurses
 
 EXECFILE = cdkexe
 
-OBJS = cdk1.o
+SRCS= cdktest2.cc
+
+OBJS = cdktest2.o
 
 all:$(EXECFILE)
 
 clean:
 	rm -f $(OBJS) $(EXECFILE) *.P *~ \#*
 $(EXECFILE):$(OBJS)
-	$(CXX) -o $@ $(OBJS)$(LDFLAGS)$(LDLIBS) 
+	$(CXX)  -o $@ $(OBJS)  $(LDFLAGS) $(LDLIBS)  
