@@ -87,7 +87,7 @@ int main()
   binInFile.read((char *)myRecord,sizeof(BinaryFileRecord)) ; // reading in of the record 
 
   binInFile.read((char *)myHeader,sizeof(BinaryFileHeader)) ; // read iint he records
-
+  cout <<"Version" <<   setprecision(10) << myHeader->versionNumber << endl ; 
   // setCDKMatrixCell(myMatrix,1,1,myHeader->magicNumber) ;
   // setCDKMatrixCell(myMatrix,1,2,myHeader->versionNumber);
   // setCDKMatrixCell(myMatrix,1,3,myHeader->numRecords) ; 
@@ -98,5 +98,6 @@ int main()
 
   cin >> x ; 
   // Cleanup screen
+  binInFile.close() ; 
   endCDK();
 }
